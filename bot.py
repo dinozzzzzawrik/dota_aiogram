@@ -1,5 +1,4 @@
 import requests
-import re
 
 from aiogram import Bot, types
 from aiogram.dispatcher import Dispatcher
