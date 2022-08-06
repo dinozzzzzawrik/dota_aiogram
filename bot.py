@@ -39,7 +39,7 @@ async def check(message: types.Message):
     if status:
         await message.reply(main_info + '\n' + winrate)
     else:
-        await message.reply("Нет такого аккаунта")
+        await message.reply("Нет такого аккаунта или у него закрытый доступ к статистике матчей.")
 
 
 executor.start_polling(dp, skip_updates=True)
