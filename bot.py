@@ -4,6 +4,7 @@ from aiogram import Bot, types
 from aiogram.dispatcher import Dispatcher
 from aiogram.utils import executor
 from funcs import *
+from database import *
 
 from data import config
 
@@ -19,8 +20,15 @@ async def start(message: types.Message):
 
 @dp.message_handler(commands=['add_id'])
 async def add_id(message: types.Message):
-    msg = message.get_args()
-    await message.reply(f"ID: {msg} добавлен в базу данных.")
+    dota_id = message.get_args()
+    tg_id = message.from_user.id
+
+    try:
+        BD.add_id(dota_id, tg_id)
+        await message.reply(f"ID: {dota_id} успешно добавлен в базу данных, для его проверки введите команду /check_id")
+    except Exception as e:
+        await message.reply("Ошибка при добавлении ID в базу данных.")
+        await message.reply(e)
 
 
 @dp.message_handler()
