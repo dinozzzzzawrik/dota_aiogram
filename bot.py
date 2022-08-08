@@ -17,6 +17,12 @@ async def start(message: types.Message):
     await message.reply("Hello, I'm a bot that can help you to find a place to eat.")
 
 
+@dp.message_handler(commands=['add_id'])
+async def add_id(message: types.Message):
+    msg = message.get_args()
+    await message.reply(f"ID: {msg} добавлен в базу данных.")
+
+
 @dp.message_handler()
 async def check(message: types.Message):
     msg = message.text
@@ -40,12 +46,6 @@ async def check(message: types.Message):
         await message.reply(main_info + '\n' + winrate)
     else:
         await message.reply("Нет такого аккаунта или у него закрытый доступ к статистике матчей.")
-
-
-@dp.message_handler(commands=['add_id'])
-async def add_id(message: types.Message):
-    msg = message.text
-    await message.reply(f"ID: {msg} добавлен в базу данных.")
 
 
 executor.start_polling(dp, skip_updates=True)
