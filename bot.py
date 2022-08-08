@@ -42,4 +42,10 @@ async def check(message: types.Message):
         await message.reply("Нет такого аккаунта или у него закрытый доступ к статистике матчей.")
 
 
+@dp.message_handler(commands=['add_id'])
+async def add_id(message: types.Message):
+    msg = message.text
+    await message.reply(f"ID: {msg} добавлен в базу данных.")
+
+
 executor.start_polling(dp, skip_updates=True)
