@@ -48,4 +48,6 @@ async def check(message: types.Message):
         await message.reply("Нет такого аккаунта или у него закрытый доступ к статистике матчей.")
 
 
-executor.start_polling(dp, skip_updates=True)
+if __name__ == '__main__':
+    executor.start_polling(dp, skip_updates=True)
+
