@@ -29,5 +29,18 @@ class BD:
                     ({tg_id}, {dota_id});"""
                 )
 
+        @staticmethod
+        def check_id(tg_id):
+            connection = psycopg2.connect(host=config.host, port=config.port, database=config.database,
+                                          user=config.user,
+                                          password=config.password)
+            connection.autocommit = True
+            with connection.cursor() as cursor:
+                cursor.execute(
+                    f"""SELECT dota_id FROM users WHERE tg_id = '{tg_id}';"""
+                )
+                result = cursor.fetchone()
+                return result[0]
+
     except (Exception, psycopg2.Error) as error:
         print(f"[ERROR] Error while connecting to PostgreSQL: {error}")
